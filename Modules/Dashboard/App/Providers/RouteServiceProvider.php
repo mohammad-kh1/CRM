@@ -1,12 +1,17 @@
 <?php
 
-namespace Modules\Dashboard\Providers;
+namespace Modules\Dashboard\App\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
 {
+    /**
+     * The module namespace to assume when generating URLs to actions.
+     */
+    protected string $moduleNamespace = 'Modules\Dashboard\App\Http\Controllers';
+
     /**
      * Called before routes are registered.
      *
@@ -34,7 +39,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes(): void
     {
-        Route::middleware('web')->group(module_path('Dashboard', '/routes/web.php'));
+        Route::middleware('web')
+            ->namespace($this->moduleNamespace)
+            ->group(module_path('Dashboard', '/routes/web.php'));
     }
 
     /**
@@ -44,6 +51,9 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes(): void
     {
-        Route::middleware('api')->prefix('api')->name('api.')->group(module_path('Dashboard', '/routes/api.php'));
+        Route::prefix('api')
+            ->middleware('api')
+            ->namespace($this->moduleNamespace)
+            ->group(module_path('Dashboard', '/routes/api.php'));
     }
 }
