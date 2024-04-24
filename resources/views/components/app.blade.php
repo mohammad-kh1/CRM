@@ -12,6 +12,7 @@
 <body>
     {{ $slot }}
 
+@vite("resources/js/app.js")
 @stack("js")
 </body>
 </html>

@@ -4,6 +4,7 @@ export default {
         "./resources/**/*.blade.php",
         "./resources/**/*.js",
         "./resources/**/*.vue",
+        "./node_modules/flowbite/**/*.js",
     ],
   theme: {
 
@@ -16,6 +17,8 @@ export default {
           '2xl': '1536px',
         }
   },
-  plugins: [],
+  plugins: [
+      require('flowbite/plugin')
+  ],
 }
 
