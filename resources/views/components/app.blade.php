@@ -10,6 +10,8 @@
     <title>{{ $title ?? "Title" }}</title>
 </head>
 <body>
+<x-sidebar />
+
     {{ $slot }}
 
 @vite("resources/js/app.js")
