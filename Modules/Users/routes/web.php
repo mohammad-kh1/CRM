@@ -15,5 +15,6 @@ use Modules\Users\App\Http\Controllers\UsersController;
 */
 
 Route::group([], function () {
+    Route::get("users/filter/{filter?}",[UsersController::class,"filter"])->name("users.filter");
     Route::resource('users', UsersController::class)->names('users');
 });

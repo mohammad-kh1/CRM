@@ -66,18 +66,27 @@ class UsersController extends Controller
         $data = $request->validated();
         $result = $this->userServiceContract->updateUser($data, $id);
         if ($result) {
-            return redirect()->back()->with("update_success","User Updated Successfuly");
+            return redirect()->back()->with("update_success", "User Updated Successfuly");
         }
-        return redirect()->back()->with("update_fail","User Not Updated");
+        return redirect()->back()->with("update_fail", "User Not Updated");
 
     }
 
     /**
      * Remove the specified resource from storUser $user).
      */
-    public function destroy(User $user) : RedirectResponse
+    public function destroy(User $user): RedirectResponse
     {
         $this->userServiceContract->deleteUser($user->id);
-        return redirect()->route('users.index')->with("delete_success" , "User Deleted Successfuly");
+        return redirect()->route('users.index')->with("delete_success", "User Deleted Successfuly");
+    }
+
+    /**
+     * Filter Users Index Page
+     */
+    public function filter(Request $request)
+    {
+        $users = $this->userServiceContract->filterUsers($request->input());
+        return view("users.users", compact("users"));
     }
 }

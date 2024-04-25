@@ -3,6 +3,7 @@
 namespace Modules\Users\App\Services;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Hash;
@@ -41,5 +42,10 @@ class UserService implements UserServiceContract
     public function deleteUser(int $id) : bool
     {
         return $this->userEloquentContract->deleteUser($id);
+    }
+
+    public function filterUsers(array $data) : Model | Collection
+    {
+        return $this->userEloquentContract->filterUsers($data);
     }
 }

@@ -3,6 +3,7 @@
 namespace Modules\Users\App\Services\Contracts;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -15,4 +16,6 @@ interface UserServiceContract
     public function updateUser(array $data , int $id) : Model | User;
 
     public function deleteUser(int $id) : bool;
+
+    public function filterUsers(array $data) : Model | Collection;
 }
