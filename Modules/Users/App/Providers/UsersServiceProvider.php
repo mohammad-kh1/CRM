@@ -4,6 +4,10 @@ namespace Modules\Users\App\Providers;
 
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
+use Modules\Users\App\Repositories\Contracts\UserEloquentContract;
+use Modules\Users\App\Repositories\UserEloquentRepository;
+use Modules\Users\App\Services\Contracts\UserServiceContract;
+use Modules\Users\App\Services\UserService;
 
 class UsersServiceProvider extends ServiceProvider
 {
@@ -30,6 +34,8 @@ class UsersServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->register(RouteServiceProvider::class);
+        $this->app->bind(UserEloquentContract::class , UserEloquentRepository::class);
+        $this->app->bind(UserServiceContract::class , UserService::class);
     }
 
     /**
