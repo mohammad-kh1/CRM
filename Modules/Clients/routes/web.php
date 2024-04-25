@@ -15,5 +15,6 @@ use Modules\Clients\App\Http\Controllers\ClientsController;
 */
 
 Route::group([], function () {
+    Route::get("clients/filter/{filter?}",[ClientsController::class,'filter'])->name("clients.filter");
     Route::resource('clients', ClientsController::class)->names('clients');
 });

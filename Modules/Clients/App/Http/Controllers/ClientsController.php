@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Modules\Clients\App\Http\Requests\ClientCreateRequest;
+use Modules\Clients\App\Http\Requests\ClientUpdateRequest;
+use Modules\Clients\App\Models\Clients;
 use Modules\Clients\App\Services\Contracts\ClientsServiceContract;
 
 class ClientsController extends Controller
@@ -46,34 +48,40 @@ class ClientsController extends Controller
     }
 
     /**
-     * Show the specified resource.
-     */
-    public function show($id)
-    {
-        return view('clients::show');
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit($id)
+    public function edit(Clients $client)
     {
-        return view('clients::edit');
+        return view('clients.updateClient' , compact("client"));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id): RedirectResponse
+    public function update(ClientUpdateRequest $request, $id): RedirectResponse
     {
-        //
+        $data = $request->validated();
+        $result = $this->clientsServiceContract->updateClient($data , $id);
+        if ($result) {
+            return redirect()->back()->with("update_success", "Client Updated Successfuly");
+        }
+        return redirect()->back()->with("update_fail", "Client Not Updated");
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(Clients $client)
     {
-        //
+        $this->clientsServiceContract->deleteClient($client->id);
+        return redirect()->route('clients.index')->with("delete_success", "Client Deleted Successfuly");
+
+    }
+
+    public function filter(Request $request)
+    {
+        $clients = $this->clientsServiceContract->filterClients($request->input());
+        return view("clients.index", compact("clients"));
+
     }
 }

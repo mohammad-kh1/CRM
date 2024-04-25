@@ -1,4 +1,4 @@
-<x-app title="Users">
+<x-app title="Clients">
 
     <div class="p-4 sm:ml-64">
 
@@ -26,20 +26,20 @@
             </a>
 
 
-            <form class="max-w-lg  mb-40" method="GET" action="{{ route('users.filter') }}">
+            <form class="max-w-lg  mb-40" method="GET" action="{{ route('clients.filter') }}">
                 <div class="flex">
                     <label for="search-dropdown" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">Your
                         Email</label>
                     <select id="search-dropdown" name="filter"
                             class="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg hover:bg-gray-200 focus:ring-4 focus:outline-none focus:ring-gray-100 dark:bg-gray-700 dark:hover:bg-gray-600 dark:focus:ring-gray-700 dark:text-white dark:border-gray-600">
-                        <option value="company_name">COMPANY</option>
-                        <option value="vat">VAT</option>
-                        <option value="address">ADDRESS</option>
+                        <option value="company_name" {{ \Illuminate\Support\Facades\Request::get("filter") == "company_name" ? "selected" : ""  }}>COMPANY</option>
+                        <option value="vat" {{ \Illuminate\Support\Facades\Request::get("filter") == "vat" ? "selected" : ""  }}>VAT</option>
+                        <option value="address" {{ \Illuminate\Support\Facades\Request::get("filter") == "address" ? "selected" : ""  }}>ADDRESS</option>
                     </select>
                     <div class="relative w-full">
-                        <input type="search" name="search" id="search-input"
+                        <input type="search" value="{{\Illuminate\Support\Facades\Request::get("search") ?? ''}}"  name="search" id="search-input"
                                class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-s-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                               placeholder="Search Mockups, Logos, Design Templates..."
+                               placeholder="Search"
                         />
                         <button type="submit"
                                 class="absolute top-0 end-0 p-2.5 text-sm font-medium h-full text-white bg-blue-700 rounded-e-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
@@ -86,11 +86,11 @@
                                 {{ $client->address }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="{{ route('users.edit',$client->id) }}"
+                                <a href="{{ route('clients.edit',$client->id) }}"
                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                 </a>
-                                <form action="{{ route('users.destroy',$client->id) }}" method="POST"
-                                      onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                <form action="{{ route('clients.destroy',$client->id) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure you want to delete this client?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -102,7 +102,7 @@
                     @endforeach
                     </tbody>
                 </table>
-                @if(!(request()->path() == "users/filter"))
+                @if(!(request()->path() == "clients/filter"))
                     <div class="p-4">
                         {{ $clients->links()}}
                     </div>

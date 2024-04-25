@@ -17,7 +17,7 @@ class ClientCreateRequest extends FormRequest
             "email" => ["required","string","email"],
             "city" => ["required","string","min:2","max:60"],
             "address" => ["required","string"],
-            "phone_number" => ["required","integer"],
+            "phone_number" => ["required","string"],
             "zip" => ["required","integer"],
             "vat" => ["required","integer"],
 

@@ -2,6 +2,7 @@
 
 namespace Modules\Clients\App\Services;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Modules\Clients\App\Models\Clients;
@@ -24,5 +25,20 @@ class ClientsService implements ClientsServiceContract
     public function createClient(array $data): Model|Clients
     {
         return $this->clientEloquentContract->createClient($data);
+    }
+
+    public function deleteClient(int $id) : bool
+    {
+        return $this->clientEloquentContract->deleteClient($id);
+    }
+
+    public function updateClient(array $data , int $id) : Model | Clients
+    {
+        return $this->clientEloquentContract->updateClient($data , $id);
+    }
+
+    public function filterClients(array $data) : Model | Collection
+    {
+        return $this->clientEloquentContract->filterClients($data);
     }
 }
