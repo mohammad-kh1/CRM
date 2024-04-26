@@ -1,4 +1,4 @@
-<x-app title="Create Project">
+<x-app title="Create Task">
     <div class="p-4 sm:ml-64">
 
         <div class="border-2 border-gray-200 dashed rounded-lg dark:border-gray-700 mt-14">
@@ -112,7 +112,7 @@
                         </label>
                         <select id="countries" name="user_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @foreach($allUsers->get() as $user)
+                            @foreach($users->get() as $user)
                                 <option value="{{ $user->id }}">{{ $user->first_name ." ". $user->last_name}}</option>
                             @endforeach
                         </select>
@@ -133,7 +133,7 @@
                             Assigned client </label>
                         <select id="countries" name="client_id"
                                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                            @foreach($allClients->get() as $client)
+                            @foreach($clients->get() as $client)
                                 <option value="{{ $client->id }}">{{ $client->name }}</option>
                             @endforeach
                         </select>
@@ -146,6 +146,27 @@
 
                 </div>
                 {{--  END Assigned client  --}}
+                {{-- START Assigned project --}}
+                <div class="mb-5 p-2">
+                    <div class="mb-5 p-2">
+                        <label for="client_id"
+                               class="block mb-2 text-sm font-medium {{ $errors->has('client_id') ? 'text-red-700 dark:text-red-500' : 'text-gray-900 dark:text-white' }}">
+                            Assigned project </label>
+                        <select id="countries" name="project_id"
+                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                            @foreach($projects->get() as $project)
+                                <option value="{{ $project->id }}">{{ $project->title }}</option>
+                            @endforeach
+                        </select>
+
+                        @error('client_id')
+                        <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span
+                                class="font-medium">Oops!</span> {{ $message }}</p>
+                        @enderror
+                    </div>
+
+                </div>
+                {{--  END Assigned project  --}}
                 {{-- START STATUS --}}
                 <div class="mb-5 p-2">
                     <div class="mb-5 p-2">

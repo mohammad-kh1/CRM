@@ -18,10 +18,10 @@
                     </div>
                 </div>
             @endif
-            <a href="{{ route('projects.create') }}">
+            <a href="{{ route('tasks.create') }}">
                 <button type="button"
                         class="text-white bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800 shadow-lg shadow-blue-500/50 dark:shadow-lg dark:shadow-blue-800/80 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 ">
-                    Create Project
+                    Create Task
                 </button>
             </a>
 
@@ -68,30 +68,30 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach($projects  as $project)
+                    @foreach($tasks  as $task)
                         <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                             <th scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                <a href="{{ route('projects.show',$project->id) }}">{{ $project->title }}</a>
+                                <a href="{{ route('tasks.show',$task->id) }}">{{ $task->title }}</a>
                             </th>
                             <td class="px-6 py-4">
-                                {{ $project->user()->first()->fullName ?? "N/A"}}
+                                {{ $task->user()->first()->fullName ?? "N/A"}}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $project->client->name }}
+                                {{ $task->client->name }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $project->deadline }}
+                                {{ $task->deadline }}
                             </td>
                             <td class="px-6 py-4">
-                                {{ $project->status }}
+                                {{ $task->status }}
                             </td>
                             <td class="px-6 py-4">
-                                <a href="{{ route('projects.edit',$project->id) }}"
+                                <a href="{{ route('tasks.edit',$task->id) }}"
                                    class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Edit
                                 </a>
-                                <form action="{{ route('projects.destroy',$project->id) }}" method="POST"
-                                      onsubmit="return confirm('Are you sure you want to delete this Project?');">
+                                <form action="{{ route('tasks.destroy',$task->id) }}" method="POST"
+                                      onsubmit="return confirm('Are you sure you want to delete this Task?');">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit"
@@ -105,7 +105,7 @@
                 </table>
                 @if(!(request()->path() == "projects/filter"))
                     <div class="p-4">
-                        {{ $projects->links()}}
+                        {{ $tasks->links()}}
                     </div>
                 @endif
             </div>

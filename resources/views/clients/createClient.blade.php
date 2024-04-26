@@ -1,4 +1,4 @@
-<x-app title="Create User">
+<x-app title="Create Client">
 
     <div class="p-4 sm:ml-64">
 

@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Seeder;
 use Modules\Clients\Database\Seeders\ClientsDatabaseSeeder;
 use Modules\Projects\Database\Seeders\ProjectsDatabaseSeeder;
+use Modules\Tasks\Database\Seeders\TasksDatabaseSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +23,8 @@ class DatabaseSeeder extends Seeder
 //            ->create();
         $this->call([
 //            ClientsDatabaseSeeder::class,
-        ProjectsDatabaseSeeder::class
+//        ProjectsDatabaseSeeder::class
+        TasksDatabaseSeeder::class
         ]);
     }
 }
