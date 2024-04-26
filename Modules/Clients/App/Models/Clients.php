@@ -4,7 +4,9 @@ namespace Modules\Clients\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Modules\Clients\Database\Factories\ClientsFactory;
+use Modules\Projects\App\Models\Projects;
 
 class Clients extends Model
 {
@@ -27,5 +29,9 @@ class Clients extends Model
     protected static function newFactory(): ClientsFactory
     {
         return ClientsFactory::new();
+    }
+    public function projects() : HasMany
+    {
+        return $this->hasMany(Projects::class,"client_id");
     }
 }
