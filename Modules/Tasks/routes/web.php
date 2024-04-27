@@ -14,7 +14,7 @@ use Modules\Tasks\App\Http\Controllers\TasksController;
 |
 */
 
-Route::group([], function () {
+Route::group(["middleware"=>["auth"]], function () {
     Route::get("tasks/filter/{filter?}",[TasksController::class,'filter'])->name("tasks.filter");
     Route::resource('tasks', TasksController::class)->names('tasks');
 });

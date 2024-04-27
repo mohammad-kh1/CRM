@@ -10,9 +10,10 @@
     <title>{{ $title ?? "Title" }}</title>
 </head>
 <body>
-<x-sidebar />
-
-    {{ $slot }}
+@if(!(request()->path() == "login"))
+    <x-sidebar/>
+@endif
+{{ $slot }}
 
 @stack("js")
 </body>

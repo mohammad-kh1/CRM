@@ -14,7 +14,7 @@ use Modules\Projects\App\Http\Controllers\ProjectsController;
 |
 */
 
-Route::group([], function () {
+Route::group(["middleware"=>["auth"]], function () {
     Route::get("/projects/filter/{filter?}",[ProjectsController::class,"filter"])->name("projects.filter");
     Route::resource('projects', ProjectsController::class)->names('projects');
 });
