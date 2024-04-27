@@ -5,7 +5,7 @@ namespace Modules\Dashboard\App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Config;
 
 class DashboardController extends Controller
 {
@@ -30,7 +30,6 @@ class DashboardController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        //
     }
 
     /**
