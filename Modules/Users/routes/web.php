@@ -14,7 +14,7 @@ use Modules\Users\App\Http\Controllers\UsersController;
 |
 */
 
-Route::group(["middleware"=>["auth"]], function () {
+Route::group(["middleware"=>["auth","role:admin"]], function () {
     Route::get("users/filter/{filter?}",[UsersController::class,"filter"])->name("users.filter");
     Route::resource('users', UsersController::class)->names('users');
 });
